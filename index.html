@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uji Kamera SIKG</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 520px;
+      margin: 30px auto;
+      padding: 20px;
+      text-align: center;
+      background: #f4f6f8;
+    }
+    main {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+    }
+    video {
+      width: 100%;
+      background: #222;
+      border-radius: 12px;
+      margin-top: 16px;
+    }
+    button {
+      padding: 12px 18px;
+      margin: 6px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #1769aa;
+      color: white;
+    }
+    #pesan {
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h2>Uji Kamera SIKG</h2>
+    <p>Halaman ini menguji apakah kamera HP dapat dibuka langsung.</p>
+    <button id="buka">Buka Kamera</button>
+    <button id="ambil" disabled>Ambil Foto</button>
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="kanvas" hidden></canvas>
+    <p id="pesan">Tekan Buka Kamera dan izinkan akses kamera.</p>
+    <img id="hasil" alt="Hasil foto" style="width:100%;border-radius:12px">
+  </main>
+  <script>
+    const video = document.getElementById('video');
+    const buka = document.getElementById('buka');
+    const ambil = document.getElementById('ambil');
+    const pesan = document.getElementById('pesan');
+    const kanvas = document.getElementById('kanvas');
+    const hasil = document.getElementById('hasil');
+    let aliran = null;
+
+    buka.onclick = async () => {
+      try {
+        if (!navigator.mediaDevices?.getUserMedia) {
+          throw new Error('Browser tidak mendukung kamera langsung. Pastikan halaman dibuka melalui HTTPS.');
+        }
+        if (aliran) aliran.getTracks().forEach(track => track.stop());
+
+        aliran = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'user' },
+          audio: false
+        });
+
+        video.srcObject = aliran;
+        await video.play();
+        ambil.disabled = false;
+        pesan.textContent = 'Kamera aktif. Silakan ambil foto.';
+      } catch (e) {
+        pesan.textContent = 'Kamera gagal dibuka: ' + e.message;
+      }
+    };
+
+    ambil.onclick = () => {
+      if (!aliran || !video.videoWidth) {
+        pesan.textContent = 'Kamera belum siap.';
+        return;
+      }
+      kanvas.width = video.videoWidth;
+      kanvas.height = video.videoHeight;
+      kanvas.getContext('2d').drawImage(
+        video, 0, 0, kanvas.width, kanvas.height
+      );
+      hasil.src = kanvas.toDataURL('image/jpeg', 0.8);
+      pesan.textContent = 'Foto berhasil diambil langsung dari kamera.';
+    };
+
+    window.addEventListener('pagehide', () => {
+      if (aliran) aliran.getTracks().forEach(track => track.stop());
+    });
+  </script>
+</body>
+</html>
