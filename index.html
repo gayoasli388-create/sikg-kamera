@@ -514,7 +514,15 @@
         $("attendancePanel").classList.remove("hidden");
         $("pin").value = "";
 
-        tampilPesan("Login berhasil. Silakan isi absensi.", "success");
+       tampilPesan(
+  "Login berhasil. Kamera akan dibuka; izinkan akses kamera jika diminta.",
+  "success"
+);
+
+// Membuka kamera otomatis setelah login berhasil
+window.setTimeout(function() {
+  bukaKamera();
+}, 300);
       } catch (error) {
         tampilPesan(
           error.message || "Login gagal. Periksa koneksi server.",
