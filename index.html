@@ -4,61 +4,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#123b68">
-  <title>SIKG - Sistem Informasi Kehadiran Guru</title>
+  <title>SIKG - Kehadiran Guru</title>
 
   <style>
-    :root {
-      --navy: #123b68;
-      --blue: #1e63a6;
-      --light: #f2f6fb;
-      --border: #dce4ee;
-      --text: #172b42;
-      --muted: #64748b;
-      --green: #16834a;
-      --red: #b42318;
-    }
-
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      background: var(--light);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.5;
+      padding: 18px;
+      background: #f1f5f9;
+      color: #172033;
+      font-family: Arial, sans-serif;
     }
 
-    header {
-      background: var(--navy);
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: #14532d;
       color: white;
-      padding: 22px 16px;
       text-align: center;
+      padding: 22px 16px;
+      border-radius: 16px;
+      margin-bottom: 18px;
     }
 
-    header h1 {
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 25px;
+    }
+
+    .header p {
       margin: 0;
-      font-size: 24px;
-    }
-
-    header p {
-      margin: 6px 0 0;
       font-size: 14px;
-      opacity: .9;
-    }
-
-    main {
-      width: min(100% - 24px, 620px);
-      margin: 22px auto;
     }
 
     .card {
       background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 14px;
       padding: 20px;
       margin-bottom: 16px;
-      box-shadow: 0 4px 16px rgba(20, 50, 80, .05);
+      box-shadow: 0 3px 12px rgba(0,0,0,.06);
     }
 
     h2 {
@@ -66,44 +54,37 @@
       font-size: 20px;
     }
 
-    h3 {
-      margin: 20px 0 8px;
-      font-size: 16px;
-    }
-
     label {
       display: block;
-      font-weight: 700;
-      font-size: 14px;
-      margin: 14px 0 6px;
+      font-weight: bold;
+      margin: 14px 0 7px;
     }
 
     input, select, textarea {
+      display: block;
       width: 100%;
       padding: 12px;
-      border: 1px solid #bdcad9;
-      border-radius: 9px;
-      font: inherit;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 16px;
       background: white;
-      color: var(--text);
     }
 
     textarea {
-      min-height: 90px;
+      min-height: 85px;
       resize: vertical;
     }
 
     button {
+      display: block;
       width: 100%;
-      padding: 13px 15px;
+      padding: 13px;
       margin-top: 12px;
-      border: 0;
+      border: none;
       border-radius: 9px;
-      font: inherit;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-      background: var(--blue);
-      color: white;
     }
 
     button:disabled {
@@ -111,268 +92,263 @@
       cursor: not-allowed;
     }
 
-    button.secondary {
-      background: #e8eff8;
-      color: var(--navy);
-      border: 1px solid var(--border);
+    .primary {
+      background: #15803d;
+      color: white;
     }
 
-    button.danger {
-      background: #fff0ef;
-      color: var(--red);
-      border: 1px solid #f2c5c1;
+    .secondary {
+      background: #e2e8f0;
+      color: #172033;
     }
 
-    .hidden { display: none !important; }
-
-    .muted {
-      color: var(--muted);
-      font-size: 13px;
+    .danger {
+      background: #b91c1c;
+      color: white;
     }
 
     .notice {
-      padding: 12px;
-      margin-bottom: 15px;
-      border-radius: 9px;
-      background: #eef5ff;
-      color: var(--navy);
-      font-size: 14px;
-      overflow-wrap: anywhere;
-    }
-
-    .message {
       display: none;
       padding: 12px;
-      margin: 14px 0;
-      border-radius: 9px;
-      font-size: 14px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      line-height: 1.5;
       overflow-wrap: anywhere;
     }
 
-    .message.show { display: block; }
-    .message.error { background: #fff0ef; color: var(--red); }
-    .message.success { background: #eaf8ef; color: #146c3b; }
-    .message.info { background: #eef5ff; color: var(--navy); }
-
-    .camera-box {
-      background: #101820;
-      border-radius: 12px;
-      overflow: hidden;
-      min-height: 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .success {
+      display: block;
+      background: #dcfce7;
+      color: #166534;
     }
 
-    video, #photoPreview {
+    .error {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .info {
+      display: block;
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .user-info {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .camera-box {
+      width: 100%;
+      overflow: hidden;
+      background: #0f172a;
+      border-radius: 10px;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    video, #preview {
       display: block;
       width: 100%;
-      max-height: 440px;
+      max-height: 420px;
       object-fit: contain;
-      background: #101820;
+      background: #0f172a;
     }
 
     .camera-placeholder {
       color: white;
-      text-align: center;
-      padding: 30px 15px;
-      font-size: 14px;
+      padding: 35px 12px;
+      line-height: 1.6;
     }
 
-    .row-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .row-buttons button { margin-top: 10px; }
-
-    .status-line {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 30px;
-      background: #e8eff8;
-      color: var(--navy);
-      font-size: 12px;
-      font-weight: 700;
+    .small {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #64748b;
     }
 
     footer {
       text-align: center;
-      color: var(--muted);
+      color: #64748b;
       font-size: 12px;
-      padding: 12px 20px 30px;
-    }
-
-    @media (max-width: 400px) {
-      .card { padding: 15px; }
-      header h1 { font-size: 21px; }
+      padding: 10px;
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <h1>SIKG</h1>
-    <p>Sistem Informasi Kehadiran Guru</p>
-  </header>
+  <main class="container">
 
-  <main>
-    <div id="globalMessage" class="message" role="status"
+    <header class="header">
+      <h1>SIKG</h1>
+      <p>Sistem Informasi Kehadiran Guru</p>
+    </header>
+
+    <div id="message" class="notice" role="status"
          aria-live="polite"></div>
 
     <!-- HALAMAN LOGIN -->
-    <section id="loginSection" class="card">
+    <section id="loginPanel" class="card">
       <h2>Login Guru</h2>
-      <p class="muted">
-        Masuk menggunakan username dan PIN yang diberikan administrator.
-      </p>
 
       <form id="loginForm">
-        <label for="username">Username</label>
-        <input id="username" name="username"
-               autocomplete="username" required maxlength="30">
+        <label for="userID">Username</label>
+        <input
+          id="userID"
+          name="userID"
+          type="text"
+          autocomplete="username"
+          required
+          maxlength="30"
+          placeholder="Masukkan username">
 
         <label for="pin">PIN</label>
-        <input id="pin" name="pin" type="password"
-               inputmode="numeric" autocomplete="current-password"
-               pattern="[0-9]{6,12}" minlength="6" maxlength="12"
-               required>
+        <input
+          id="pin"
+          name="pin"
+          type="password"
+          inputmode="numeric"
+          autocomplete="current-password"
+          pattern="[0-9]{6,12}"
+          minlength="6"
+          maxlength="12"
+          required
+          placeholder="PIN 6–12 digit">
 
-        <button id="loginButton" type="submit">Masuk</button>
+        <button id="loginButton" class="primary" type="submit">
+          Login
+        </button>
       </form>
 
-      <p class="muted">
-        Jika tidak dapat masuk, hubungi administrator sekolah.
+      <p class="small">
+        Gunakan akun yang telah dibuat oleh administrator SIKG.
       </p>
     </section>
 
     <!-- HALAMAN ABSENSI -->
-    <section id="attendanceSection" class="hidden">
+    <section id="attendancePanel" class="hidden">
+
       <div class="card">
-        <div class="status-line">
-          <h2 style="margin:0">Absensi Guru</h2>
-          <span class="pill">Sesi aktif</span>
-        </div>
-
-        <div class="notice">
-          <div class="muted">Nama guru</div>
-          <strong id="teacherName">-</strong>
-          <div class="muted" style="margin-top:6px">
-            Username: <span id="teacherUsername">-</span>
-          </div>
-        </div>
-
-        <label for="attendanceType">Jenis absensi</label>
-        <select id="attendanceType">
-          <option value="Datang">Datang</option>
-          <option value="Pulang">Pulang</option>
-        </select>
-
-        <label for="attendanceStatus">Status kehadiran</label>
-        <select id="attendanceStatus">
-          <option value="Hadir">Hadir</option>
-          <option value="Izin">Izin</option>
-          <option value="Sakit">Sakit</option>
-          <option value="Tanpa Keterangan">Tanpa Keterangan</option>
-        </select>
-
-        <div id="reasonGroup" class="hidden">
-          <label for="reason">Alasan / keterangan</label>
-          <textarea id="reason" maxlength="500"
-                    placeholder="Tuliskan alasan kehadiran..."></textarea>
+        <h2>Identitas Pengguna</h2>
+        <div class="user-info">
+          <div>Nama: <strong id="teacherName">-</strong></div>
+          <div>Peran: <strong id="teacherRole">-</strong></div>
         </div>
       </div>
 
       <div class="card">
-        <h2>Foto Kehadiran</h2>
+        <h2>Formulir Absensi</h2>
 
-        <p class="muted">
-          Buka kamera dan ambil foto saat melakukan absensi.
-          Foto dari galeri tidak dapat dipilih melalui halaman ini.
-        </p>
+        <form id="attendanceForm">
 
-        <div class="camera-box">
-          <div id="cameraPlaceholder" class="camera-placeholder">
-            Kamera belum dibuka.
+          <label for="jenisAbsensi">Jenis Absensi</label>
+          <select id="jenisAbsensi" required>
+            <option value="Datang">Datang</option>
+            <option value="Pulang">Pulang</option>
+          </select>
+
+          <label for="statusKehadiran">Status Kehadiran</label>
+          <select id="statusKehadiran" required>
+            <option value="Hadir">Hadir</option>
+            <option value="Izin">Izin</option>
+            <option value="Sakit">Sakit</option>
+            <option value="Tanpa Keterangan">Tanpa Keterangan</option>
+          </select>
+
+          <div id="reasonBox" class="hidden">
+            <label for="alasan">Alasan</label>
+            <textarea
+              id="alasan"
+              maxlength="500"
+              placeholder="Tuliskan alasan kehadiran"></textarea>
           </div>
-          <video id="cameraVideo" class="hidden"
-                 autoplay playsinline muted></video>
-          <img id="photoPreview" class="hidden"
-               alt="Pratinjau foto absensi">
-        </div>
 
-        <div class="row-buttons">
-          <button type="button" id="openCameraButton">
+          <label>Foto Bukti Kehadiran</label>
+
+          <div class="camera-box">
+            <div id="cameraPlaceholder" class="camera-placeholder">
+              Kamera belum dibuka.
+              <br>
+              Tekan tombol Buka Kamera di bawah.
+            </div>
+
+            <video
+              id="camera"
+              class="hidden"
+              autoplay
+              playsinline
+              muted></video>
+
+            <img
+              id="preview"
+              class="hidden"
+              alt="Pratinjau foto absensi">
+          </div>
+
+          <button id="openCameraButton"
+                  class="secondary" type="button">
             Buka Kamera
           </button>
-          <button type="button" id="captureButton"
-                  class="secondary" disabled>
+
+          <button id="captureButton"
+                  class="primary hidden" type="button">
             Ambil Foto
           </button>
-        </div>
 
-        <div class="row-buttons">
-          <button type="button" id="retakeButton"
-                  class="secondary hidden">
-            Foto Ulang
+          <button id="retakeButton"
+                  class="secondary hidden" type="button">
+            Buka Kamera / Ambil Ulang
           </button>
-          <button type="button" id="closeCameraButton"
-                  class="danger">
-            Tutup Kamera
-          </button>
-        </div>
 
-        <div id="photoMessage" class="message" role="status"></div>
+          <p id="photoStatus" class="small">
+            Foto harus diambil langsung melalui kamera.
+            Anda tidak dapat memilih foto dari galeri.
+          </p>
+
+          <button id="saveButton" class="primary" type="submit">
+            Simpan Absensi
+          </button>
+        </form>
       </div>
 
       <div class="card">
-        <h2>Lokasi GPS <span class="pill">Opsional</span></h2>
-        <p class="muted">
-          Lokasi hanya dikirim jika kamu memilih untuk mengambilnya
-          dan memberikan izin pada browser.
+        <h2>Lokasi (Opsional)</h2>
+        <p class="small">
+          Lokasi hanya direkam jika Anda memberikan izin GPS.
+          Waktu resmi absensi menggunakan waktu server.
         </p>
-
-        <button id="gpsButton" type="button" class="secondary">
+        <button id="gpsButton" class="secondary" type="button">
           Ambil Lokasi GPS
         </button>
-        <p id="gpsStatus" class="muted">Lokasi belum diambil.</p>
+        <p id="gpsStatus" class="small">Lokasi belum diambil.</p>
       </div>
 
-      <div class="card">
-        <h2>Konfirmasi Absensi</h2>
-        <div class="notice">
-          Pastikan jenis absensi, status, dan foto sudah benar sebelum
-          mengirim. Absensi yang sudah tersimpan tidak dapat dibatalkan
-          melalui halaman ini.
-        </div>
+      <button id="logoutButton" class="danger" type="button">
+        Logout
+      </button>
 
-        <button id="submitAttendanceButton" type="button" disabled>
-          Kirim Absensi
-        </button>
-        <button id="logoutButton" type="button" class="danger">
-          Keluar
-        </button>
-      </div>
     </section>
+
+    <footer>
+      SIKG · Sistem Informasi Kehadiran Guru
+    </footer>
   </main>
 
-  <footer>
-    SIKG · Data absensi dikirim ke server sekolah.
-  </footer>
-
-  <!-- Iframe tersembunyi untuk komunikasi form POST dengan Apps Script -->
-  <iframe id="backendFrame" name="backendFrame"
-          title="Penghubung backend"
-          style="display:none"></iframe>
+  <!-- Iframe tersembunyi untuk komunikasi dengan Apps Script -->
+  <iframe
+    id="backendFrame"
+    name="backendFrame"
+    title="Koneksi server"
+    class="hidden"></iframe>
 
   <script>
     "use strict";
@@ -380,98 +356,82 @@
     const BACKEND_URL =
       "https://script.google.com/macros/s/AKfycbxJYOxdDcQo5l7la6D4FdjnT-8dUOZCYHyvabKVruMT-WEEsw_5xRTY9iKB8IHCsY-i/exec";
 
-    const $ = (id) => document.getElementById(id);
+    const $ = function(id) {
+      return document.getElementById(id);
+    };
 
-    let sessionToken = "";
-    let currentUser = null;
+    const frame = $("backendFrame");
+
+    let token = "";
+    let namaGuru = "";
+    let peranGuru = "";
     let cameraStream = null;
-    let photoData = "";
-    let photoTime = "";
+    let fotoData = "";
+    let waktuFotoPerangkat = "";
     let gpsData = {
       latitude: null,
       longitude: null,
       akurasiGPS: null
     };
-    let requestPending = false;
-    let requestTimer = null;
-    let cameraBusy = false;
 
-    function showMessage(message, type = "info", target = "globalMessage") {
-      const element = $(target);
-      element.textContent = message;
-      element.className = "message show " + type;
+    function tampilPesan(teks, jenis) {
+      const box = $("message");
+      box.textContent = teks;
+      box.className = "notice " + (jenis || "info");
+      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
-    function hideMessage(target = "globalMessage") {
-      const element = $(target);
-      element.textContent = "";
-      element.className = "message";
+    function sembunyikanPesan() {
+      $("message").className = "notice";
+      $("message").textContent = "";
     }
 
-    function setBusy(busy, buttonId, busyText, normalText) {
-      const button = $(buttonId);
-      button.disabled = busy;
-      button.textContent = busy ? busyText : normalText;
+    function izinkanOrigin(origin) {
+      return origin === "https://script.google.com" ||
+        origin.endsWith(".googleusercontent.com");
     }
 
     /*
-     * Kirim data dengan form POST ke Apps Script.
-     * Respons diterima dari iframe melalui postMessage.
-     * PIN tidak diletakkan pada URL.
+     * Mengirim permintaan POST ke Apps Script lewat iframe.
+     * Metode ini menghindari fetch lintas domain yang terkena CORS.
      */
-    function callBackend(action, data) {
-      return new Promise((resolve, reject) => {
-        if (requestPending) {
-          reject(new Error("Permintaan sebelumnya masih diproses."));
-          return;
-        }
+    function callBackend(aksi, data) {
+      return new Promise(function(resolve, reject) {
+        let selesai = false;
+        let timer = null;
 
-        const frame = $("backendFrame");
-        requestPending = true;
-
-        let finished = false;
-
-        function cleanup() {
+        function bersihkan() {
           window.removeEventListener("message", onMessage);
-          clearTimeout(requestTimer);
-          requestPending = false;
+          if (timer) clearTimeout(timer);
+          form.remove();
         }
 
         function finish(callback, value) {
-          if (finished) return;
-          finished = true;
-          cleanup();
+          if (selesai) return;
+          selesai = true;
+          bersihkan();
           callback(value);
         }
 
         function onMessage(event) {
-          // Hanya menerima pesan dari iframe backend kita.
-          if (event.source !== frame.contentWindow) return;
+          if (!izinkanOrigin(event.origin)) return;
 
-          if (!event.data || event.data.type !== "SIKG_RESPONSE") {
+          if (!event.data ||
+              event.data.type !== "SIKG_RESPONSE") {
             return;
           }
 
-          if (typeof event.data.data !== "object" ||
-              event.data.data === null) {
-            finish(reject, new Error("Respons server tidak valid."));
+          if (!event.data.data ||
+              typeof event.data.data !== "object") {
+            finish(
+              reject,
+              new Error("Respons server tidak valid.")
+            );
             return;
           }
 
           finish(resolve, event.data.data);
         }
-
-        window.addEventListener("message", onMessage);
-
-        requestTimer = setTimeout(() => {
-          finish(
-            reject,
-            new Error(
-              "Server tidak memberikan respons. Periksa koneksi internet, " +
-              "URL deployment, dan kode doPost(e), lalu coba lagi."
-            )
-          );
-        }, 60000);
 
         const form = document.createElement("form");
         form.method = "POST";
@@ -479,291 +439,248 @@
         form.target = "backendFrame";
         form.style.display = "none";
 
-        const fields = {
-          aksi: action,
-          data: JSON.stringify(data)
-        };
+        const actionInput = document.createElement("input");
+        actionInput.type = "hidden";
+        actionInput.name = "aksi";
+        actionInput.value = aksi;
 
-        Object.entries(fields).forEach(([name, value]) => {
-          const input = document.createElement("input");
-          input.type = "hidden";
-          input.name = name;
-          input.value = value;
-          form.appendChild(input);
-        });
+        const dataInput = document.createElement("input");
+        dataInput.type = "hidden";
+        dataInput.name = "data";
+        dataInput.value = JSON.stringify(data);
 
+        form.appendChild(actionInput);
+        form.appendChild(dataInput);
         document.body.appendChild(form);
+
+        window.addEventListener("message", onMessage);
+
+        timer = setTimeout(function() {
+          finish(
+            reject,
+            new Error(
+              "Server tidak merespons dalam 60 detik. " +
+              "Periksa deployment Apps Script dan koneksi internet."
+            )
+          );
+        }, 60000);
 
         try {
           form.submit();
         } catch (error) {
           finish(reject, error);
-        } finally {
-          form.remove();
         }
       });
     }
 
     // LOGIN
-    $("loginForm").addEventListener("submit", async (event) => {
+    $("loginForm").addEventListener("submit", async function(event) {
       event.preventDefault();
-      if (requestPending) return;
+      sembunyikanPesan();
 
-      const userID = $("username").value.trim();
+      const userID = $("userID").value.trim();
       const pin = $("pin").value;
 
-      if (!userID || !/^[0-9]{6,12}$/.test(pin)) {
-        showMessage(
-          "Masukkan username dan PIN yang terdiri dari 6–12 angka.",
+      if (!/^[0-9]{6,12}$/.test(pin)) {
+        tampilPesan("PIN harus terdiri dari 6–12 digit angka.", "error");
+        return;
+      }
+
+      $("loginButton").disabled = true;
+      $("loginButton").textContent = "Memeriksa akun...";
+
+      try {
+        const hasil = await callBackend("login", {
+          userID: userID,
+          pin: pin
+        });
+
+        if (!hasil.berhasil) {
+          throw new Error(hasil.pesan || "Login gagal.");
+        }
+
+        if (!hasil.token) {
+          throw new Error("Token login tidak diterima dari server.");
+        }
+
+        token = hasil.token;
+        namaGuru = hasil.nama || userID;
+        peranGuru = hasil.peran || "GURU";
+
+        $("teacherName").textContent = namaGuru;
+        $("teacherRole").textContent = peranGuru;
+
+        $("loginPanel").classList.add("hidden");
+        $("attendancePanel").classList.remove("hidden");
+        $("pin").value = "";
+
+        tampilPesan("Login berhasil. Silakan isi absensi.", "success");
+      } catch (error) {
+        tampilPesan(
+          error.message || "Login gagal. Periksa koneksi server.",
+          "error"
+        );
+      } finally {
+        $("loginButton").disabled = false;
+        $("loginButton").textContent = "Login";
+      }
+    });
+
+    // STATUS DAN ALASAN
+    $("statusKehadiran").addEventListener("change", function() {
+      const perluAlasan = this.value !== "Hadir";
+
+      $("reasonBox").classList.toggle("hidden", !perluAlasan);
+      $("alasan").required = perluAlasan;
+
+      if (!perluAlasan) {
+        $("alasan").value = "";
+      }
+    });
+
+    // BUKA KAMERA LANGSUNG, TANPA INPUT FILE
+    async function bukaKamera() {
+      sembunyikanPesan();
+
+      if (!navigator.mediaDevices ||
+          !navigator.mediaDevices.getUserMedia) {
+        tampilPesan(
+          "Browser tidak mendukung kamera. Buka halaman melalui " +
+          "HTTPS di Chrome atau browser modern.",
           "error"
         );
         return;
       }
 
-      hideMessage();
-      setBusy(true, "loginButton", "Memeriksa...", "Masuk");
+      tutupKamera();
 
       try {
-        const result = await callBackend("login", { userID, pin });
-
-        if (!result.berhasil) {
-          showMessage(result.pesan || "Login gagal.", "error");
-          return;
-        }
-
-        if (!result.token || !result.nama) {
-          showMessage(
-            "Respons login tidak lengkap. Silakan coba lagi.",
-            "error"
-          );
-          return;
-        }
-
-        sessionToken = result.token;
-        currentUser = {
-          userID: userID,
-          nama: result.nama,
-          peran: result.peran || "GURU"
-        };
-
-        $("teacherName").textContent = currentUser.nama;
-        $("teacherUsername").textContent = currentUser.userID;
-
-        $("loginSection").classList.add("hidden");
-        $("attendanceSection").classList.remove("hidden");
-        $("pin").value = "";
-
-        showMessage(
-          "Login berhasil. Silakan lengkapi absensi.",
-          "success"
-        );
-        updateSubmitButton();
-      } catch (error) {
-        showMessage(error.message || "Terjadi kesalahan saat login.", "error");
-      } finally {
-        setBusy(false, "loginButton", "Memeriksa...", "Masuk");
-      }
-    });
-
-    // TAMPILKAN ALASAN JIKA STATUS BUKAN HADIR
-    $("attendanceStatus").addEventListener("change", () => {
-      const needsReason = $("attendanceStatus").value !== "Hadir";
-      $("reasonGroup").classList.toggle("hidden", !needsReason);
-
-      if (!needsReason) $("reason").value = "";
-      updateSubmitButton();
-    });
-
-    $("attendanceType").addEventListener("change", updateSubmitButton);
-    $("reason").addEventListener("input", updateSubmitButton);
-
-    // KAMERA
-    async function openCamera() {
-      if (cameraBusy) return;
-      cameraBusy = true;
-      $("openCameraButton").disabled = true;
-      hideMessage("photoMessage");
-
-      try {
-        if (!navigator.mediaDevices ||
-            !navigator.mediaDevices.getUserMedia) {
-          throw new Error(
-            "Browser tidak mendukung kamera langsung. " +
-            "Buka halaman HTTPS menggunakan browser terbaru."
-          );
-        }
-
-        stopCamera();
-
         cameraStream = await navigator.mediaDevices.getUserMedia({
           audio: false,
           video: {
-            facingMode: "user",
+            facingMode: { ideal: "user" },
             width: { ideal: 1280 },
-            height: { ideal: 960 }
+            height: { ideal: 720 }
           }
         });
 
-        const video = $("cameraVideo");
-        video.srcObject = cameraStream;
-        video.classList.remove("hidden");
-        $("photoPreview").classList.add("hidden");
+        $("camera").srcObject = cameraStream;
+        $("camera").classList.remove("hidden");
+        $("preview").classList.add("hidden");
         $("cameraPlaceholder").classList.add("hidden");
 
-        await video.play();
+        $("captureButton").classList.remove("hidden");
+        $("openCameraButton").classList.add("hidden");
+        $("retakeButton").classList.add("hidden");
 
-        $("captureButton").disabled = false;
-        showMessage(
-          "Kamera aktif. Pastikan wajah terlihat, lalu ambil foto.",
-          "info",
-          "photoMessage"
-        );
+        $("photoStatus").textContent =
+          "Arahkan kamera, lalu tekan Ambil Foto.";
+
       } catch (error) {
-        stopCamera();
-        showMessage(
-          "Kamera tidak dapat dibuka: " +
-          (error.message || "izin kamera belum diberikan."),
-          "error",
-          "photoMessage"
-        );
-      } finally {
-        cameraBusy = false;
-        $("openCameraButton").disabled = false;
+        let pesan = "Kamera tidak dapat dibuka.";
+
+        if (error.name === "NotAllowedError") {
+          pesan = "Izin kamera ditolak. Izinkan kamera pada pengaturan browser.";
+        } else if (error.name === "NotFoundError") {
+          pesan = "Kamera tidak ditemukan pada perangkat ini.";
+        } else if (error.name === "NotReadableError") {
+          pesan = "Kamera sedang digunakan aplikasi lain.";
+        }
+
+        tampilPesan(pesan, "error");
       }
     }
 
-    function stopCamera() {
+    function tutupKamera() {
       if (cameraStream) {
-        cameraStream.getTracks().forEach(track => track.stop());
+        cameraStream.getTracks().forEach(function(track) {
+          track.stop();
+        });
         cameraStream = null;
       }
 
-      const video = $("cameraVideo");
-      video.srcObject = null;
-      video.classList.add("hidden");
-      $("captureButton").disabled = true;
+      $("camera").srcObject = null;
     }
 
-    async function capturePhoto() {
-      const video = $("cameraVideo");
+    $("openCameraButton").addEventListener("click", bukaKamera);
+    $("retakeButton").addEventListener("click", bukaKamera);
 
-      if (!cameraStream || !video.videoWidth || !video.videoHeight) {
-        showMessage(
-          "Buka kamera dan tunggu sampai gambar muncul.",
-          "error",
-          "photoMessage"
-        );
+    // AMBIL FOTO DARI VIDEO KAMERA
+    $("captureButton").addEventListener("click", function() {
+      const video = $("camera");
+
+      if (!cameraStream ||
+          !video.videoWidth ||
+          !video.videoHeight) {
+        tampilPesan("Kamera belum siap. Coba lagi.", "error");
         return;
       }
 
       const canvas = document.createElement("canvas");
-      const maxWidth = 1280;
-      const scale = Math.min(1, maxWidth / video.videoWidth);
+      const batasLebar = 960;
+      const skala = Math.min(1, batasLebar / video.videoWidth);
 
-      canvas.width = Math.round(video.videoWidth * scale);
-      canvas.height = Math.round(video.videoHeight * scale);
+      canvas.width = Math.round(video.videoWidth * skala);
+      canvas.height = Math.round(video.videoHeight * skala);
 
-      const context = canvas.getContext("2d");
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      // Kompresi agar ukuran foto sesuai batas backend.
-      let quality = 0.78;
-      photoData = canvas.toDataURL("image/jpeg", quality);
+      fotoData = canvas.toDataURL("image/jpeg", 0.65);
+      waktuFotoPerangkat = new Date().toISOString();
 
-      while (photoData.length > 4 * 1024 * 1024 && quality > 0.40) {
-        quality -= 0.08;
-        photoData = canvas.toDataURL("image/jpeg", quality);
-      }
+      tutupKamera();
 
-      if (photoData.length > 5 * 1024 * 1024) {
-        photoData = "";
-        showMessage(
-          "Ukuran foto masih terlalu besar. Coba ambil foto kembali.",
-          "error",
-          "photoMessage"
-        );
-        updateSubmitButton();
-        return;
-      }
+      $("preview").src = fotoData;
+      $("preview").classList.remove("hidden");
+      $("camera").classList.add("hidden");
+      $("cameraPlaceholder").classList.add("hidden");
 
-      photoTime = new Date().toISOString();
-
-      $("photoPreview").src = photoData;
-      $("photoPreview").classList.remove("hidden");
-      $("cameraVideo").classList.add("hidden");
+      $("captureButton").classList.add("hidden");
+      $("openCameraButton").classList.add("hidden");
       $("retakeButton").classList.remove("hidden");
-      $("captureButton").disabled = true;
 
-      stopCamera();
+      $("photoStatus").textContent =
+        "Foto berhasil diambil. Jika sudah sesuai, tekan Simpan Absensi.";
 
-      showMessage(
-        "Foto berhasil diambil. Periksa pratinjau sebelum mengirim.",
-        "success",
-        "photoMessage"
-      );
-      updateSubmitButton();
-    }
-
-    $("openCameraButton").addEventListener("click", openCamera);
-    $("captureButton").addEventListener("click", capturePhoto);
-
-    $("retakeButton").addEventListener("click", async () => {
-      photoData = "";
-      photoTime = "";
-      $("photoPreview").removeAttribute("src");
-      $("photoPreview").classList.add("hidden");
-      $("retakeButton").classList.add("hidden");
-      $("cameraPlaceholder").classList.remove("hidden");
-      updateSubmitButton();
-      await openCamera();
-    });
-
-    $("closeCameraButton").addEventListener("click", () => {
-      stopCamera();
-      $("cameraPlaceholder").classList.remove("hidden");
+      tampilPesan("Foto berhasil diambil.", "success");
     });
 
     // GPS OPSIONAL
-    $("gpsButton").addEventListener("click", () => {
+    $("gpsButton").addEventListener("click", function() {
       if (!navigator.geolocation) {
         $("gpsStatus").textContent =
-          "Browser ini tidak mendukung pengambilan lokasi.";
+          "Browser tidak mendukung GPS.";
         return;
       }
 
       $("gpsButton").disabled = true;
-      $("gpsStatus").textContent =
-        "Sedang mengambil lokasi. Izinkan akses lokasi pada browser.";
+      $("gpsStatus").textContent = "Mengambil lokasi...";
 
       navigator.geolocation.getCurrentPosition(
-        position => {
+        function(posisi) {
           gpsData = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            akurasiGPS: position.coords.accuracy
+            latitude: posisi.coords.latitude,
+            longitude: posisi.coords.longitude,
+            akurasiGPS: posisi.coords.accuracy
           };
 
           $("gpsStatus").textContent =
             "Lokasi berhasil diambil. Akurasi sekitar " +
-            Math.round(position.coords.accuracy) + " meter.";
+            Math.round(posisi.coords.accuracy) + " meter.";
+
           $("gpsButton").disabled = false;
         },
-        error => {
+        function(error) {
           gpsData = {
             latitude: null,
             longitude: null,
             akurasiGPS: null
           };
 
-          const messages = {
-            1: "Izin lokasi ditolak.",
-            2: "Lokasi tidak tersedia.",
-            3: "Waktu pengambilan lokasi habis."
-          };
-
           $("gpsStatus").textContent =
-            (messages[error.code] || "Lokasi gagal diambil.") +
-            " Absensi tetap dapat dilakukan tanpa GPS.";
+            "Lokasi tidak tersedia. Absensi tetap dapat dilanjutkan.";
+
           $("gpsButton").disabled = false;
         },
         {
@@ -774,161 +691,119 @@
       );
     });
 
-    // VALIDASI FORM ABSENSI
-    function updateSubmitButton() {
-      const status = $("attendanceStatus").value;
-      const reasonValid = status === "Hadir" ||
-        $("reason").value.trim().length > 0;
+    // SIMPAN ABSENSI DAN FOTO KE BACKEND
+    $("attendanceForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+      sembunyikanPesan();
 
-      $("submitAttendanceButton").disabled =
-        !sessionToken ||
-        !photoData ||
-        !reasonValid ||
-        requestPending;
-    }
-
-    // KIRIM ABSENSI
-    $("submitAttendanceButton").addEventListener("click", async () => {
-      if (!sessionToken || !currentUser || requestPending) return;
-
-      if (!photoData) {
-        showMessage("Ambil foto kamera terlebih dahulu.", "error");
+      if (!token) {
+        tampilPesan("Sesi login tidak tersedia. Login kembali.", "error");
         return;
       }
 
-      const jenisAbsensi = $("attendanceType").value;
-      const statusKehadiran = $("attendanceStatus").value;
-      const alasan = $("reason").value.trim();
-
-      if (statusKehadiran !== "Hadir" && !alasan) {
-        showMessage(
-          "Alasan wajib diisi jika status bukan Hadir.",
+      if (!fotoData ||
+          !fotoData.startsWith("data:image/jpeg;base64,")) {
+        tampilPesan(
+          "Ambil foto langsung menggunakan kamera terlebih dahulu.",
           "error"
         );
         return;
       }
 
-      const konfirmasi = confirm(
-        "Kirim absensi " + jenisAbsensi + " dengan status " +
-        statusKehadiran + "?\n\nPastikan data dan foto sudah benar."
-      );
+      const jenisAbsensi = $("jenisAbsensi").value;
+      const statusKehadiran = $("statusKehadiran").value;
+      const alasan = $("alasan").value.trim();
 
-      if (!konfirmasi) return;
+      if (statusKehadiran !== "Hadir" && !alasan) {
+        tampilPesan("Alasan wajib diisi jika status bukan Hadir.", "error");
+        $("alasan").focus();
+        return;
+      }
 
-      setBusy(
-        true,
-        "submitAttendanceButton",
-        "Mengirim absensi...",
-        "Kirim Absensi"
-      );
+      $("saveButton").disabled = true;
+      $("saveButton").textContent = "Menyimpan absensi...";
 
       try {
-        const payload = {
-          jenisAbsensi: jenisAbsensi,
-          statusKehadiran: statusKehadiran,
-          alasan: alasan,
-          fotoData: photoData,
-          waktuFotoPerangkat: photoTime,
-          latitude: gpsData.latitude,
-          longitude: gpsData.longitude,
-          akurasiGPS: gpsData.akurasiGPS
-        };
-
-        const result = await callBackend("simpanAbsensi", {
-          token: sessionToken,
-          payload: payload
+        const hasil = await callBackend("simpanAbsensi", {
+          token: token,
+          payload: {
+            jenisAbsensi: jenisAbsensi,
+            statusKehadiran: statusKehadiran,
+            alasan: alasan,
+            fotoData: fotoData,
+            waktuFotoPerangkat: waktuFotoPerangkat,
+            latitude: gpsData.latitude,
+            longitude: gpsData.longitude,
+            akurasiGPS: gpsData.akurasiGPS
+          }
         });
 
-        if (!result.berhasil) {
-          showMessage(result.pesan || "Absensi gagal disimpan.", "error");
-          return;
+        if (!hasil.berhasil) {
+          throw new Error(hasil.pesan || "Absensi gagal disimpan.");
         }
 
-        showMessage(
-          (result.pesan || "Absensi berhasil disimpan.") +
-          (result.waktuServer
-            ? " Waktu server: " + result.waktuServer
-            : ""),
+        tampilPesan(
+          (hasil.pesan || "Absensi berhasil disimpan.") +
+          (hasil.waktuServer ? " Waktu server: " + hasil.waktuServer : ""),
           "success"
         );
 
-        // Kosongkan foto setelah penyimpanan berhasil.
-        photoData = "";
-        photoTime = "";
-        $("photoPreview").removeAttribute("src");
-        $("photoPreview").classList.add("hidden");
-        $("retakeButton").classList.add("hidden");
+        fotoData = "";
+        waktuFotoPerangkat = "";
+
+        $("preview").removeAttribute("src");
+        $("preview").classList.add("hidden");
+        $("camera").classList.add("hidden");
         $("cameraPlaceholder").classList.remove("hidden");
 
-        $("attendanceStatus").value = "Hadir";
-        $("reason").value = "";
-        $("reasonGroup").classList.add("hidden");
+        $("openCameraButton").classList.remove("hidden");
+        $("captureButton").classList.add("hidden");
+        $("retakeButton").classList.add("hidden");
 
-        gpsData = {
-          latitude: null,
-          longitude: null,
-          akurasiGPS: null
-        };
-        $("gpsStatus").textContent = "Lokasi belum diambil.";
+        $("photoStatus").textContent =
+          "Absensi tersimpan. Ambil foto baru untuk absensi berikutnya.";
+
+        $("attendanceForm").reset();
+        $("reasonBox").classList.add("hidden");
+        $("alasan").required = false;
 
       } catch (error) {
-        showMessage(
-          error.message ||
-          "Gagal mengirim absensi. Periksa koneksi dan coba lagi.",
+        tampilPesan(
+          error.message || "Gagal menyimpan absensi.",
           "error"
         );
       } finally {
-        setBusy(
-          false,
-          "submitAttendanceButton",
-          "Mengirim absensi...",
-          "Kirim Absensi"
-        );
-        updateSubmitButton();
+        $("saveButton").disabled = false;
+        $("saveButton").textContent = "Simpan Absensi";
       }
     });
 
     // LOGOUT
-    $("logoutButton").addEventListener("click", async () => {
-      if (requestPending) {
-        showMessage(
-          "Tunggu sampai permintaan sebelumnya selesai.",
-          "info"
-        );
-        return;
-      }
+    $("logoutButton").addEventListener("click", async function() {
+      tutupKamera();
 
-      stopCamera();
+      const tokenLama = token;
+      token = "";
+      fotoData = "";
+      waktuFotoPerangkat = "";
 
-      const oldToken = sessionToken;
-      sessionToken = "";
-      currentUser = null;
-      photoData = "";
-      photoTime = "";
+      $("attendancePanel").classList.add("hidden");
+      $("loginPanel").classList.remove("hidden");
+      $("loginForm").reset();
 
-      $("attendanceSection").classList.add("hidden");
-      $("loginSection").classList.remove("hidden");
-      $("username").value = "";
-      $("pin").value = "";
-      hideMessage();
-
-      updateSubmitButton();
-
-      if (oldToken) {
-        try {
-          await callBackend("logout", { token: oldToken });
-        } catch (error) {
-          // Sesi server juga memiliki masa berlaku terbatas.
-          console.warn("Permintaan logout server gagal.", error);
+      try {
+        if (tokenLama) {
+          await callBackend("logout", { token: tokenLama });
         }
+      } catch (error) {
+        // Tampilan tetap logout meskipun server tidak merespons.
       }
+
+      tampilPesan("Anda telah keluar dari SIKG.", "success");
     });
 
-    // Tutup kamera ketika halaman ditinggalkan.
-    window.addEventListener("pagehide", stopCamera);
-
-    // Mulai dengan kondisi tombol yang benar.
-    updateSubmitButton();
+    // Hentikan kamera saat halaman ditinggalkan.
+    window.addEventListener("pagehide", tutupKamera);
   </script>
 </body>
 </html>
